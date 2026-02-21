@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>School Tools - Ibikoresho by'Ishuri</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #f4a400;
+    --accent2: #e63946;
+    --light: #f8f5ef;
+    --white: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --success: #22c55e;
+    --border: #e5e0d8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--light);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ANNOUNCEMENT BAR */
+  .announcement {
+    background: var(--accent);
+    color: var(--primary);
+    text-align: center;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+  }
+  .announcement span { margin: 0 8px; }
+
+  /* HEADER */
+  header {
+    background: var(--primary);
+    color: var(--white);
+    padding: 0 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 48px; height: 48px;
+    background: var(--accent);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+  }
+  .logo-text { color: var(--white); }
+  .logo-text .brand { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; line-height:1; }
+  .logo-text .tagline { font-size: 0.7rem; opacity: 0.7; letter-spacing: 2px; text-transform: uppercase; }
+
+  nav { display: flex; gap: 30px; }
+  nav a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  nav a:hover { color: var(--accent); }
+
+  .header-actions { display: flex; gap: 12px; align-items: center; }
+  .btn-cart {
+    background: var(--accent);
+    color: var(--primary);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex; align-items: center; gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-cart:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(244,164,0,0.4); }
+  .cart-count {
+    background: var(--accent2);
+    color: white;
+    border-radius: 50%;
+    width: 20px; height: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, #0f2a47 60%, #1a3a5c 100%);
+    color: white;
+    padding: 80px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(244,164,0,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '📚';
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12rem;
+    opacity: 0.08;
+  }
+  .hero-content { max-width: 600px; position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(244,164,0,0.2);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    line-height: 1.7;
+    margin-bottom: 35px;
+  }
+  .hero-btns { display: flex; gap: 15px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--primary);
+    border: none;
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(244,164,0,0.4); }
+  .btn-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.4);
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--white);
+    border-bottom: 2px solid var(--border);
+    padding: 25px 5%;
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat .num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--primary); }
+  .stat .label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* SECTION */
+  section { padding: 70px 5%; }
+  .section-header { text-align: center; margin-bottom: 50px; }
+  .section-tag {
+    display: inline-block;
+    background: rgba(244,164,0,0.15);
+    color: var(--accent);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .section-header p { color: var(--muted); font-size: 1rem; max-width: 500px; margin: 0 auto; }
+
+  /* CATEGORIES */
+  .categories { background: var(--light); }
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+  }
+  .cat-card {
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .cat-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
+  .cat-card.active { border-color: var(--primary); background: var(--primary); color: white; }
+  .cat-icon { font-size: 2.5rem; margin-bottom: 10px; }
+  .cat-name { font-weight: 700; font-size: 0.9rem; }
+  .cat-count { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+  .cat-card.active .cat-count { color: rgba(255,255,255,0.7); }
+
+  /* PRODUCTS */
+  .products-section { background: white; }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .product-card {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); border-color: var(--accent); }
+  .product-badge {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: var(--accent2);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    z-index: 1;
+  }
+  .product-badge.new { background: var(--success); }
+  .product-img {
+    width: 100%; height: 200px;
+    object-fit: cover;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    background: linear-gradient(135deg, #f0ebe0, #e8e0d0);
+  }
+  .product-info { padding: 20px; }
+  .product-category { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .product-name { font-weight: 700; font-size: 1rem; margin-bottom: 8px; line-height: 1.4; color: var(--text); }
+  .product-price-row { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
+  .product-price { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; color: var(--primary); }
+  .product-price small { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 400; color: var(--muted); }
+  .btn-add {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .btn-add:hover { background: var(--accent); color: var(--primary); }
+
+  /* FREE DELIVERY BANNER */
+  .delivery-banner {
+    background: linear-gradient(135deg, var(--success), #16a34a);
+    color: white;
+    padding: 40px 5%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .delivery-banner::before {
+    content: '🛵';
+    position: absolute;
+    font-size: 8rem;
+    opacity: 0.1;
+    left: 5%;
+    top: 50%; transform: translateY(-50%);
+  }
+  .delivery-banner h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 10px; }
+  .delivery-banner p { font-size: 1rem; opacity: 0.9; }
+  .delivery-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.4);
+    padding: 8px 20px;
+    border-radius: 30px;
+    margin-top: 15px;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  /* CONTACT */
+  .contact-section { background: var(--primary); color: white; }
+  .contact-section .section-header h2 { color: white; }
+  .contact-section .section-header p { color: rgba(255,255,255,0.7); }
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
+  .contact-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .contact-card:hover { background: rgba(255,255,255,0.15); transform: translateY(-4px); }
+  .contact-icon { font-size: 2.5rem; margin-bottom: 16px; }
+  .contact-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.6; margin-bottom: 8px; }
+  .contact-value { font-weight: 700; font-size: 1rem; color: var(--accent); }
+  .contact-sub { font-size: 0.85rem; opacity: 0.7; margin-top: 4px; }
+
+  /* CART MODAL */
+  .overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 2000;
+    justify-content: center; align-items: flex-start;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  .overlay.open { display: flex; }
+  .cart-modal {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    max-width: 550px;
+    width: 100%;
+    margin: auto;
+  }
+  .cart-modal h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--primary); margin-bottom: 24px; }
+  .cart-item {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .cart-item-icon { font-size: 2rem; width: 50px; text-align: center; }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-weight: 700; font-size: 0.95rem; }
+  .cart-item-price { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+  .cart-item-remove {
+    background: none; border: none; cursor: pointer;
+    color: var(--accent2); font-size: 1.2rem; padding: 4px 8px;
+  }
+  .cart-total {
+    margin-top: 24px;
+    padding: 20px;
+    background: var(--light);
+    border-radius: 12px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cart-total .label { font-weight: 700; font-size: 1rem; }
+  .cart-total .amount { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--primary); }
+  .checkout-info {
+    background: rgba(34,197,94,0.1);
+    border: 1px solid var(--success);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 16px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #16a34a;
+    font-weight: 600;
+  }
+  .btn-checkout {
+    width: 100%;
+    background: var(--accent);
+    color: var(--primary);
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: all 0.3s;
+  }
+  .btn-checkout:hover { background: var(--primary); color: white; }
+  .btn-close-cart {
+    width: 100%;
+    background: transparent;
+    border: 2px solid var(--border);
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.2s;
+  }
+  .btn-close-cart:hover { border-color: var(--primary); }
+  .empty-cart { text-align: center; padding: 40px 0; color: var(--muted); }
+  .empty-cart .icon { font-size: 4rem; margin-bottom: 16px; }
+
+  /* ORDER MODAL */
+  .order-modal {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+  }
+  .order-modal h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--primary); margin-bottom: 8px; }
+  .order-modal p { color: var(--muted); margin-bottom: 24px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary); }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .btn-order {
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.3s;
+  }
+  .btn-order:hover { background: var(--accent); color: var(--primary); }
+
+  /* SUCCESS */
+  .success-modal {
+    background: white;
+    border-radius: 24px;
+    padding: 50px 40px;
+    max-width: 400px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+  }
+  .success-icon { font-size: 5rem; margin-bottom: 20px; }
+  .success-modal h2 { font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 12px; }
+  .success-modal p { color: var(--muted); line-height: 1.7; }
+
+  /* FOOTER */
+  footer {
+    background: #0a1f36;
+    color: rgba(255,255,255,0.7);
+    padding: 50px 5% 30px;
+  }
+  .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+  .footer-brand .brand { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: white; font-weight: 900; }
+  .footer-brand p { margin-top: 10px; font-size: 0.9rem; line-height: 1.7; }
+  .footer-col h4 { color: white; font-weight: 700; margin-bottom: 16px; }
+  .footer-col a { display: block; color: rgba(255,255,255,0.6); text-decoration: none; margin-bottom: 10px; font-size: 0.9rem; cursor: pointer; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap-10px; font-size: 0.85rem; }
+  .footer-bottom a { color: var(--accent); text-decoration: none; }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    background: var(--primary);
+    color: white;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    z-index: 9999;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.4s;
+    max-width: 300px;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* SCROLL ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.6s; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { display: none; }
+    .hero::after { display: none; }
+    .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="announcement">
+  🚚 FREE DELIVERY Kigali <span>•</span> Tunakorana vuba <span>•</span> Ibikoresho byose by'ishuri 📚
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a class="logo" onclick="scrollTo(0,0)" style="cursor:pointer;">
+      <div class="logo-icon">📚</div>
+      <div class="logo-text">
+        <div class="brand">School Tools</div>
+        <div class="tagline">Ibikoresho by'Ishuri</div>
+      </div>
+    </a>
+    <nav>
+      <a onclick="scrollToSection('categories')">Ibyiciro</a>
+      <a onclick="scrollToSection('products')">Ibicuruzwa</a>
+      <a onclick="scrollToSection('delivery')">Delivery</a>
+      <a onclick="scrollToSection('contact')">Twandikire</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-cart" onclick="openCart()">
+        🛒 Agasanduku
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">✨ #1 Kigali, Rwanda</div>
+    <h1>Ibikoresho by'Ishuri<br><span>Byose Aho Hantu</span></h1>
+    <p>Shaka ibikoresho byawe byose by'ishuri aha — guhera mu biisobanuro, muri za kalamu, kugeza muri za sac. Tukuzanira aho uri mu Kigali ku bure!</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="scrollToSection('products')">Reba Ibicuruzwa →</button>
+      <button class="btn-outline" onclick="openOrder()">📞 Saba Gucuruza</button>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="num">500+</div><div class="label">Ibicuruzwa</div></div>
+  <div class="stat"><div class="num">1,200+</div><div class="label">Abakiriya</div></div>
+  <div class="stat"><div class="num">100%</div><div class="label">Ubwiza Bwemejwe</div></div>
+  <div class="stat"><div class="num">FREE</div><div class="label">Delivery Kigali</div></div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="section-header fade-up">
+    <div class="section-tag">Ibyiciro</div>
+    <h2>Shaka mu Byiciro</h2>
+    <p>Vanga ibikoresho by'ubwoko bwose by'ishuri</p>
+  </div>
+  <div class="cat-grid fade-up">
+    <div class="cat-card active" onclick="filterProducts('all', this)">
+      <div class="cat-icon">🏫</div>
+      <div class="cat-name">Byose</div>
+      <div class="cat-count">Ibicuruzwa byose</div>
+    </div>
+    <div class="cat-card" onclick="filterProducts('writing', this)">
+      <div class="cat-icon">✏️</div>
+      <div class="cat-name">Guandika</div>
+      <div class="cat-count">Kalamu, Iminsi</div>
+    </div>
+    <div class="cat-card" onclick="filterProducts('books', this)">
+      <div class="cat-icon">📔</div>
+      <div class="cat-name">Ibitabo</div>
+      <div class="cat-count">Notebooks, Cahier</div>
+    </div>
+    <div class="cat-card" onclick="filterProducts('bags', this)">
+      <div class="cat-icon">🎒</div>
+      <div class="cat-name">Imifuko</div>
+      <div class="cat-count">Sac, Bags</div>
+    </div>
+    <div class="cat-card" onclick="filterProducts('art', this)">
+      <div class="cat-icon">🎨</div>
+      <div class="cat-name">Ubuhanzi</div>
+      <div class="cat-count">Amaki, Colors</div>
+    </div>
+    <div class="cat-card" onclick="filterProducts('math', this)">
+      <div class="cat-icon">📐</div>
+      <div class="cat-name">Matematiki</div>
+      <div class="cat-count">Rapporteur, Règle</div>
+    </div>
+    <div class="cat-card" onclick="filterProducts('tech', this)">
+      <div class="cat-icon">💻</div>
+      <div class="cat-name">Ikoranabuhanga</div>
+      <div class="cat-count">Calculatrice, etc</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="section-header fade-up">
+    <div class="section-tag">Ibicuruzwa</div>
+    <h2>Ibicuruzwa Byacu</h2>
+    <p>Ibikoresho by'ubuziranenge buhanitse ku giciro gikwiye</p>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- DELIVERY BANNER -->
+<div class="delivery-banner" id="delivery">
+  <h2>🚚 Free Delivery Kigali!</h2>
+  <p>Tunakorana vuba — Ongera umubare w'ibisabwa ukagera kuri FRW 5,000 maze tuguzanire ku bure.</p>
+  <div class="delivery-badge">📍 Kigali, Rwanda — Delivery Yihuse</div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-header fade-up">
+    <div class="section-tag">Twandikire</div>
+    <h2>Twandikire Nonaha</h2>
+    <p>Twifuriza kukubaza. Patrick arakwiteguye kukuganiriza.</p>
+  </div>
+  <div class="contact-grid fade-up">
+    <div class="contact-card">
+      <div class="contact-icon">📞</div>
+      <div class="contact-label">Telefoni</div>
+      <div class="contact-value">0795058933</div>
+      <div class="contact-sub">Patrick (Admin)</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">📧</div>
+      <div class="contact-label">Email</div>
+      <div class="contact-value" style="font-size:0.9rem;">patrickirakoze40@gmail.com</div>
+      <div class="contact-sub">Subira mu isaha</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">📍</div>
+      <div class="contact-label">Aho Turi</div>
+      <div class="contact-value">Kigali, Rwanda</div>
+      <div class="contact-sub">Free Delivery mu Kigali</div>
+    </div>
+    <div class="contact-card" onclick="openOrder()" style="cursor:pointer; border: 1px solid rgba(244,164,0,0.4);">
+      <div class="contact-icon">🛒</div>
+      <div class="contact-label">Enda</div>
+      <div class="contact-value" style="color: var(--accent);">Saba Gucuruza</div>
+      <div class="contact-sub">Kwishyura nyuma ya delivery</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="brand">📚 School Tools</div>
+      <p>Ibikoresho byose by'ishuri aha hantu. Tukuzanira aho uri mu Kigali nta giciro cy'inyongera.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Ibyiciro</h4>
+      <a onclick="filterProducts('writing', null); scrollToSection('products')">Kalamu & Iminsi</a>
+      <a onclick="filterProducts('books', null); scrollToSection('products')">Ibitabo & Notebooks</a>
+      <a onclick="filterProducts('bags', null); scrollToSection('products')">Imifuko</a>
+      <a onclick="filterProducts('art', null); scrollToSection('products')">Ubuhanzi</a>
+    </div>
+    <div class="footer-col">
+      <h4>Amakuru</h4>
+      <a onclick="scrollToSection('delivery')">Free Delivery</a>
+      <a onclick="scrollToSection('contact')">Twandikire</a>
+      <a onclick="openOrder()">Saba Gucuruza</a>
+    </div>
+    <div class="footer-col">
+      <h4>Twandikire</h4>
+      <a>📞 0795058933</a>
+      <a>📧 patrickirakoze40@gmail.com</a>
+      <a>📍 Kigali, Rwanda</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 School Tools. Uburenganzira bwose bwabitswe.</span>
+    <span>Made with ❤️ in Kigali, Rwanda</span>
+  </div>
+</footer>
+
+<!-- CART OVERLAY -->
+<div class="overlay" id="cartOverlay">
+  <div class="cart-modal">
+    <h2>🛒 Agasanduku Kawe</h2>
+    <div id="cartItems"></div>
+    <div id="cartFooter"></div>
+    <button class="btn-close-cart" onclick="closeCart()">← Komeza Gushakashaka</button>
+  </div>
+</div>
+
+<!-- ORDER OVERLAY -->
+<div class="overlay" id="orderOverlay">
+  <div class="order-modal">
+    <h2>📦 Saba Gucuruza</h2>
+    <p>Tuza amakuru yawe. Patrick azakwegereza vuba!</p>
+    <div class="form-group">
+      <label>Amazina yawe</label>
+      <input type="text" id="orderName" placeholder="Amazina yawe yose">
+    </div>
+    <div class="form-group">
+      <label>Numero ya Telefoni</label>
+      <input type="tel" id="orderPhone" placeholder="07xxxxxxxx">
+    </div>
+    <div class="form-group">
+      <label>Aho Utura (Kigali)</label>
+      <input type="text" id="orderAddress" placeholder="Umurenge, Gasabo, Kicukiro...">
+    </div>
+    <div class="form-group">
+      <label>Ibicuruzwa Ushaka</label>
+      <textarea id="orderItems" placeholder="Nvuga ibikoresho ushaka n'umubare wabyo..."></textarea>
+    </div>
+    <button class="btn-order" onclick="submitOrder()">📩 Ohereza Gusaba</button>
+    <button class="btn-close-cart" style="margin-top:10px;" onclick="closeOrder()">Funga</button>
+  </div>
+</div>
+
+<!-- SUCCESS OVERLAY -->
+<div class="overlay" id="successOverlay">
+  <div class="success-modal">
+    <div class="success-icon">✅</div>
+    <h2>Murakoze!</h2>
+    <p>Ibyifuzo byawe byakiriwe neza. Patrick azakwegereza kuri <strong>0795058933</strong> mu minota mike!</p>
+    <button class="btn-primary" style="margin-top:20px; display:block; text-align:center;" onclick="closeSuccess()">Subira Mu Mucyo →</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+const products = [
+  { id:1, name:'Kalamu nziza (Bic)', cat:'writing', price:500, icon:'✏️', badge:'', desc:'Pack ya 10' },
+  { id:2, name:'Maarker ya Colors (24pcs)', cat:'writing', price:4500, icon:'🖊️', badge:'hot', desc:'Imibara myinshi' },
+  { id:3, name:'Cahier 200 pages', cat:'books', price:2000, icon:'📓', badge:'', desc:'Lined, ubwiza bwiza' },
+  { id:4, name:'Notebook ya Spiral', cat:'books', price:2500, icon:'📔', badge:'new', desc:'A4, 160 pages' },
+  { id:5, name:'Sac ya School (Grande)', cat:'bags', price:15000, icon:'🎒', badge:'hot', desc:'Imiseke 3, resistante' },
+  { id:6, name:'Sac ya Ordinateur', cat:'bags', price:18000, icon:'💼', badge:'', desc:'15 inch, protégée' },
+  { id:7, name:'Box ya Colors (36pcs)', cat:'art', price:5500, icon:'🎨', badge:'new', desc:'Amaki menshi' },
+  { id:8, name:'Rapporteur + Equerre', cat:'math', price:1500, icon:'📐', badge:'', desc:'Set ya géométrie' },
+  { id:9, name:'Calculatrice Scientifique', cat:'tech', price:12000, icon:'🔢', badge:'hot', desc:'CASIO fx-82' },
+  { id:10, name:'Règle ya 30cm', cat:'math', price:800, icon:'📏', badge:'', desc:'Plastique dure' },
+  { id:11, name:'Efface (Gomme)', cat:'writing', price:300, icon:'🩹', badge:'', desc:'Pack ya 5' },
+  { id:12, name:'Colle (Glue Stick)', cat:'art', price:700, icon:'🖇️', badge:'', desc:'Pack ya 3' },
+  { id:13, name:'Carnet de Récitation', cat:'books', price:1200, icon:'📒', badge:'', desc:'100 pages' },
+  { id:14, name:'Taille Crayon', cat:'writing', price:400, icon:'✂️', badge:'', desc:'Metal, précis' },
+  { id:15, name:'Peinture Acrylique Set', cat:'art', price:8000, icon:'🎭', badge:'new', desc:'12 couleurs' },
+  { id:16, name:'Compas ya Métal', cat:'math', price:3000, icon:'🔵', badge:'', desc:'Compas résistant' },
+];
+
+let cart = [];
+let activeFilter = 'all';
+
+function renderProducts(filter='all') {
+  const grid = document.getElementById('productsGrid');
+  const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
+  grid.innerHTML = filtered.map(p => `
+    <div class="product-card fade-up">
+      ${p.badge ? `<div class="product-badge ${p.badge === 'new' ? 'new' : ''}">${p.badge === 'new' ? '🆕 NSHYA' : '🔥 Bikunzwe'}</div>` : ''}
+      <div class="product-img">${p.icon}</div>
+      <div class="product-info">
+        <div class="product-category">${getCatName(p.cat)}</div>
+        <div class="product-name">${p.name}</div>
+        <div style="font-size:0.8rem; color:var(--muted); margin-top:4px;">${p.desc}</div>
+        <div class="product-price-row">
+          <div class="product-price">${p.price.toLocaleString()} <small>RWF</small></div>
+          <button class="btn-add" onclick="addToCart(${p.id})">+ Ongeraho</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  observeFadeUp();
+}
+
+function getCatName(cat) {
+  const names = {writing:'Guandika', books:'Ibitabo', bags:'Imifuko', art:'Ubuhanzi', math:'Matematiki', tech:'Ikoranabuhanga'};
+  return names[cat] || cat;
+}
+
+function filterProducts(filter, el) {
+  activeFilter = filter;
+  document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
+  if(el) el.classList.add('active');
+  renderProducts(filter);
+}
+
+function addToCart(id) {
+  const p = products.find(x => x.id === id);
+  const existing = cart.find(x => x.id === id);
+  if(existing) existing.qty++;
+  else cart.push({...p, qty:1});
+  updateCartCount();
+  showToast(`✅ "${p.name}" yongewe mu gasanduku!`);
+}
+
+function updateCartCount() {
+  document.getElementById('cartCount').textContent = cart.reduce((s,i) => s + i.qty, 0);
+}
+
+function openCart() {
+  const overlay = document.getElementById('cartOverlay');
+  overlay.classList.add('open');
+  renderCart();
+}
+function closeCart() { document.getElementById('cartOverlay').classList.remove('open'); }
+
+function renderCart() {
+  const el = document.getElementById('cartItems');
+  const footer = document.getElementById('cartFooter');
+  if(!cart.length) {
+    el.innerHTML = '<div class="empty-cart"><div class="icon">🛒</div><p>Agasanduku kari ubusa.<br>Ongera ibicuruzwa!</p></div>';
+    footer.innerHTML = '';
+    return;
+  }
+  el.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-icon">${item.icon}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">${(item.price * item.qty).toLocaleString()} RWF (x${item.qty})</div>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart(${item.id})">🗑️</button>
+    </div>
+  `).join('');
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  footer.innerHTML = `
+    <div class="cart-total">
+      <div class="label">Igiteranyo</div>
+      <div class="amount">${total.toLocaleString()} RWF</div>
+    </div>
+    <div class="checkout-info">🚚 Free Delivery kuri Kigali yose!</div>
+    <button class="btn-checkout" onclick="closeCart(); openOrder();">📦 Saba Gucuruza →</button>
+  `;
+}
+
+function removeFromCart(id) {
+  const idx = cart.findIndex(x => x.id === id);
+  if(idx > -1) {
+    if(cart[idx].qty > 1) cart[idx].qty--;
+    else cart.splice(idx, 1);
+  }
+  updateCartCount();
+  renderCart();
+}
+
+function openOrder() {
+  const cartText = cart.map(i => `${i.name} x${i.qty}`).join(', ');
+  if(cartText) document.getElementById('orderItems').value = cartText;
+  document.getElementById('orderOverlay').classList.add('open');
+}
+function closeOrder() { document.getElementById('orderOverlay').classList.remove('open'); }
+
+function submitOrder() {
+  const name = document.getElementById('orderName').value.trim();
+  const phone = document.getElementById('orderPhone').value.trim();
+  const address = document.getElementById('orderAddress').value.trim();
+  const items = document.getElementById('orderItems').value.trim();
+  if(!name || !phone || !address || !items) {
+    showToast('⚠️ Tuza amakuru yose!'); return;
+  }
+  closeOrder();
+  cart = [];
+  updateCartCount();
+  document.getElementById('successOverlay').classList.add('open');
+}
+function closeSuccess() { document.getElementById('successOverlay').classList.remove('open'); }
+
+function scrollToSection(id) {
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+function observeFadeUp() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold: 0.1});
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+}
+
+// Close overlays on background click
+document.querySelectorAll('.overlay').forEach(o => {
+  o.addEventListener('click', e => { if(e.target === o) o.classList.remove('open'); });
+});
+
+// Init
+renderProducts();
+observeFadeUp();
+</script>
+</body>
+</html>
